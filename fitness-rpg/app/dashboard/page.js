@@ -1,5 +1,10 @@
 import XpBar from "@/components/XpBar";
 import DailyMissions from "@/components/DailyMissions";
+import { redirect } from "next/navigation";
+
+export function Home() {
+  redirect("/dashboard");
+}
 
 export default function Dashboard() {
   const user = {
