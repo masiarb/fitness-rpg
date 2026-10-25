@@ -1,28 +1,29 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI =
-  process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!global.mongoose) {
-  global.mongoose = {
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = {
     conn: null,
     promise: null,
   };
 }
 
 export async function connectDB() {
-  if (global.mongoose.conn) {
-    return global.mongoose.conn;
-  }
+  if (cached.conn) return cached.conn;
 
-  if (!global.mongoose.promise) {
-    global.mongoose.promise = mongoose.connect(
-      MONGODB_URI
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(
+      MONGODB_URI,
+      {
+        dbName: "fitness-rpg",
+      }
     );
   }
 
-  global.mongoose.conn =
-    await global.mongoose.promise;
+  cached.conn = await cached.promise;
 
-  return global.mongoose.conn;
+  return cached.conn;
 }

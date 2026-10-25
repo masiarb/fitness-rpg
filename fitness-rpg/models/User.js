@@ -1,32 +1,37 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
-  name: String,
+const UserSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  level: {
-    type: Number,
-    default: 1,
-  },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
 
-  xp: {
-    type: Number,
-    default: 0,
-  },
+    password: {
+      type: String,
+      required: true,
+    },
 
-  stats: {
-    strength: { type: Number, default: 1 },
-    nutrition: { type: Number, default: 1 },
-    endurance: { type: Number, default: 1 },
-    vitality: { type: Number, default: 1 },
-    discipline: { type: Number, default: 1 },
-  },
+    level: {
+      type: Number,
+      default: 1,
+    },
 
-  streaks: {
-    workout: { type: Number, default: 0 },
-    nutrition: { type: Number, default: 0 },
-    hydration: { type: Number, default: 0 },
+    xp: {
+      type: Number,
+      default: 0,
+    },
   },
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default mongoose.models.User ||
   mongoose.model("User", UserSchema);

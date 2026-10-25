@@ -6,19 +6,25 @@ const DailyLogSchema = new mongoose.Schema({
     ref: "User",
   },
 
-  date: {
+  mission: {
     type: String,
     required: true,
   },
 
-  protein: Number,
-  calories: Number,
-  water: Number,
-  steps: Number,
+  gameDay: {
+    type: String,
+    required: true,
+  },
 
-  workoutCompleted: Boolean,
+  completedAt: {
+    type: Date,
+    default: Date.now,
+  },
 
-  xpEarned: Number,
+  xpEarned: {
+    type: Number,
+    default: 0,
+  },
 });
 
 export default mongoose.models.DailyLog ||
