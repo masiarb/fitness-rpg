@@ -7,6 +7,7 @@ export async function POST() {
       success: true,
     });
 
+    
   response.cookies.set(
     "fitnessrpg-token",
     "",
