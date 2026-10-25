@@ -6,7 +6,10 @@ console.log(
   "BUILD MONGODB_URI:",
   MONGODB_URI
 );
-
+console.log(
+  "MONGODB_URI EXISTS:",
+  !!process.env.MONGODB_URI
+);
 let cached = global.mongoose;
 
 if (!cached) {
