@@ -21,31 +21,25 @@ export default function Home() {
   }, []);
 
   async function loadUser() {
-    try {
-      const response = await fetch(
-        "/api/me"
-      );
+  try {
+    const response = await fetch("/api/me");
 
-      const data =
-        await response.json();
-
-      if (data.authenticated) {
-        setUser(data);
-      }
-    } catch (error) {
-      console.error(error);
+    if (!response.ok) {
+      setLoading(false);
+      return;
     }
 
+    const data = await response.json();
+
+    if (data.authenticated) {
+      setUser(data);
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
     setLoading(false);
   }
-
-  if (loading) {
-    return (
-      <main className="p-8">
-        Loading...
-      </main>
-    );
-  }
+}
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
