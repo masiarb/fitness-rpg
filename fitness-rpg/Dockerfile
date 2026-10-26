@@ -8,8 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
-
 EXPOSE 3000
 
-CMD ["sh", "-c", "${START_COMMAND:-npm run dev}"]
+CMD ["sh", "-c", "npm run build && npm start"]
